@@ -104,12 +104,12 @@ class SynchronizedBuf implements Buffer
 		while(full) {
 			System.out.println("Producer tries to write."); 
 			System.out.println("Buffer is full. waiting status");
-			wait();
+			wait();//full 이 아닐때까지 wait
 		}
-		buffer = x;
+		buffer = x; //producer가 저장 
 		full = true;
 		System.out.println("Producer writes " + buffer); 
-		notifyAll(); 
+		notifyAll(); //wake up all threads who are waiting
 	 }
 	public synchronized int buffer_out() throws InterruptedException
 	{ 
