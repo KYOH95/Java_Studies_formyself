@@ -13,8 +13,8 @@ public class Driver {
 		ThreadReader t3 = new ThreadReader("Reader 3", rl);
 		ThreadWriter t4 = new ThreadWriter("Writer 1", rl);
 
-		t1.start();
 		t2.start();
+		t1.start();
 		t3.start();
 		t4.start();
 	}

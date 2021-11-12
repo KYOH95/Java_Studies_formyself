@@ -3,9 +3,10 @@ package homework_3_4_9;
 public class ReadWriteLock4_9 {
 	private int reader = 0;
 	private int writer = 0;
+	private boolean writerWaiting=false;
 
 	public synchronized void lockReader(String name) throws InterruptedException {
-		while (writer > 0 || reader>0) {
+		while (writer > 0 || writerWaiting) {
 			// print reader waiting
 			System.out.println(name + " (reader) waiting");
 			wait();
@@ -18,9 +19,11 @@ public class ReadWriteLock4_9 {
 	public synchronized void lockWriter(String name) throws InterruptedException {
 		while (writer > 0 || reader > 0) {
 			// print writer waiting
+			writerWaiting=true;
 			System.out.println(name + " (writer) waiting");
 			wait();
 		}
+		writerWaiting=false;
 		writer++;
 		// print writer locked
 		System.out.println(name + " (writer) locked");
